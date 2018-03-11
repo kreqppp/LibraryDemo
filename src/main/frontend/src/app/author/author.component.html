@@ -1,0 +1,24 @@
+<h4>Author Table</h4>
+<table class="highlight">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Books</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let author of authors">
+    <td>{{author.id}}</td>
+    <td>{{author.firstName}}</td>
+    <td>{{author.lastName}}</td>
+    <a routerLink="/booktable">
+      <td>
+        <ng-container *ngFor="let book of author.books">{{book.title}},
+        </ng-container>
+      </td>
+  </a>
+  </tr>
+  </tbody>
+</table>

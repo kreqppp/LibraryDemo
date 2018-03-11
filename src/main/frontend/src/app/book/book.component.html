@@ -1,0 +1,28 @@
+<h4>Book Table</h4>
+<table class="highlight">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Genre</th>
+    <th>Year of publication</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let book of books">
+    <td>{{book.id}}</td>
+    <td>{{book.title}}</td>
+    <div *ngIf="!book.author">
+      <td>Unknown author</td>
+    </div>
+    <div *ngIf="book.author">
+      <a routerLink="/authortable">
+        <td>{{book.author.firstName}} {{book.author.lastName}}</td>
+      </a>
+    </div>
+    <td>{{book.genre}}</td>
+    <td>{{book.year.getFullYear()}}</td>
+  </tr>
+  </tbody>
+</table>
