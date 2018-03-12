@@ -1,6 +1,7 @@
 package com.kreqppp.demo.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -8,6 +9,7 @@ import java.sql.Date;
 @Entity
 @Table(name="book")
 @AllArgsConstructor
+@Data
 public class Book {
 
     @Id
