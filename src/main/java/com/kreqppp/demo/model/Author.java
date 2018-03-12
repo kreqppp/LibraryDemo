@@ -1,6 +1,7 @@
 package com.kreqppp.demo.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -8,6 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "author")
+@Data
 @AllArgsConstructor
 public class Author {
 
@@ -23,5 +25,5 @@ public class Author {
     private String lastName;
 
     @OneToMany(mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval=true)
-    private Set<Book> books = new HashSet<Book>();
+    private Set<Book> books;
 }

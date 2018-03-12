@@ -15,10 +15,6 @@ export class AuthorComponent implements OnInit {
   constructor(private authorService: AuthorService) { }
 
   ngOnInit() {
-    this.authors=[{id: 1, firstName: "Stephan", lastName: "King", books:
-        [{id:1, title: "It", author: null, genre: "novel", year: new Date('1986')},
-          {id:2, title: "Shinning", author: null, genre: "horror", year: new Date('1977')}]},
-                  {id: 2, firstName: "Joanne", lastName: "Rowling", books: []}];
     this.getAllAuthors();
     console.log(this.authors);
   }
@@ -28,10 +24,6 @@ export class AuthorComponent implements OnInit {
       .subscribe(
         data => this.authors = data,
         errorCode =>  this.statusCode = errorCode);
-  }
-
-  returnNewArray(elements: number): Array<any>{
-    return new Array(elements);
   }
 
 }
