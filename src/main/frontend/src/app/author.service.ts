@@ -13,6 +13,8 @@ export class AuthorService{
 
   constructor(private http: Http){}
 
+
+  //fetch all authors
   getAllAuthors(): Observable<Author[]>{
     return this.http.get(this.allAuthorsUrl)
       .map(this.extractData)

@@ -13,6 +13,7 @@ export class BookService{
 
   constructor(public http: Http){}
 
+  // fetch all books
   getAllBooks(): Observable<Book[]> {
     return this.http.get(this.allBooksUrl)
       .map(this.extractData)

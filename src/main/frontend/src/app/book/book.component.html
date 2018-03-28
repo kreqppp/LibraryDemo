@@ -1,12 +1,12 @@
 <h4>Book Table</h4>
 <table class="highlight">
   <thead>
-  <tr>
-    <th>ID</th>
-    <th>Title</th>
-    <th>Author</th>
-    <th>Genre</th>
-    <th>Year of publication</th>
+  <tr >
+    <th style="width: 20%">ID</th>
+    <th style="width: 20%">Title</th>
+    <th style="width: 20%">Author</th>
+    <th style="width: 20%">Genre</th>
+    <th style="width: 20%">Year of publication</th>
   </tr>
   </thead>
   <tbody>
@@ -18,11 +18,11 @@
     </div>
     <div *ngIf="book.author">
       <a routerLink="/authortable">
-        <td>{{book.author.firstName}} {{book.author.lastName}}</td>
+        <td>{{book.author.firstName }} {{book.author.lastName}}</td>
       </a>
     </div>
     <td>{{book.genre}}</td>
-    <td>{{book.year.getFullYear()}}</td>
+    <td>{{book.year}}</td>
   </tr>
   </tbody>
 </table>

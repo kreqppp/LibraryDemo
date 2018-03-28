@@ -23,6 +23,16 @@ public class BookController {
     @GetMapping("all-books")
     public ResponseEntity<List<Book>> getAllBooks(){
         Iterable<Book> books = bookService.getAllBooks();
+        /*Sorry about it,
+                I tried use JSON annotations for preventing infinite recursion
+        (source: https://blog.encodez.com/tips/jackson-bidirectional-relationship-the-right-way-preventing-infinite-recursion-exception-with-java-jackson
+                 http://www.baeldung.com/jackson-bidirectional-relationships-and-infinite-recursion
+                )
+                but couldn't reach needs result.
+        So I had to use this bad solution(bone):*/
+        for(Book book: books){
+            book.getAuthor().setBooks(null);
+        }
         return new ResponseEntity<List<Book>>((List<Book>)books, HttpStatus.OK);
     }
 }

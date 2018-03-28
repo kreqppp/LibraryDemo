@@ -33,6 +33,10 @@
       "config": "./protractor.conf.js"
     }
   },
+  "styles": [
+    "styles.css",
+    "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css"
+  ],
   "lint": [
     {
       "files": "src/**/*.ts",

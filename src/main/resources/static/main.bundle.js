@@ -32,6 +32,7 @@ var AuthorService = (function () {
         this.http = http;
         this.allAuthorsUrl = "http://localhost:8080/all-authors";
     }
+    //fetch all authors
     AuthorService.prototype.getAllAuthors = function () {
         return this.http.get(this.allAuthorsUrl)
             .map(this.extractData)
@@ -88,6 +89,7 @@ var BookService = (function () {
         this.http = http;
         this.allBooksUrl = "http://localhost:8080/all-books";
     }
+    // fetch all books
     BookService.prototype.getAllBooks = function () {
         return this.http.get(this.allBooksUrl)
             .map(this.extractData)
@@ -133,7 +135,7 @@ webpackEmptyContext.id = 391;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(479);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__(515);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__(514);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_app_module__ = __webpack_require__(511);
 
 
@@ -170,8 +172,8 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
             selector: 'app-root',
-            template: __webpack_require__(673),
-            styles: [__webpack_require__(670)]
+            template: __webpack_require__(672),
+            styles: [__webpack_require__(669)]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
@@ -190,7 +192,7 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(470);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(203);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(510);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__book_book_component__ = __webpack_require__(514);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__book_book_component__ = __webpack_require__(513);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__author_author_component__ = __webpack_require__(512);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__book_service__ = __webpack_require__(331);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__author_service__ = __webpack_require__(330);
@@ -269,9 +271,6 @@ var AuthorComponent = (function () {
         this.authorService = authorService;
     }
     AuthorComponent.prototype.ngOnInit = function () {
-        this.authors = [{ id: 1, firstName: "Stephan", lastName: "King", books: [{ id: 1, title: "It", author: null, genre: "novel", year: new Date('1986') },
-                    { id: 2, title: "Shinning", author: null, genre: "horror", year: new Date('1977') }] },
-            { id: 2, firstName: "Joanne", lastName: "Rowling", books: [] }];
         this.getAllAuthors();
         console.log(this.authors);
     };
@@ -280,14 +279,11 @@ var AuthorComponent = (function () {
         this.authorService.getAllAuthors()
             .subscribe(function (data) { return _this.authors = data; }, function (errorCode) { return _this.statusCode = errorCode; });
     };
-    AuthorComponent.prototype.returnNewArray = function (elements) {
-        return new Array(elements);
-    };
     AuthorComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
             selector: 'app-author',
-            template: __webpack_require__(674),
-            styles: [__webpack_require__(671)]
+            template: __webpack_require__(673),
+            styles: [__webpack_require__(670)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__author_service__["a" /* AuthorService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__author_service__["a" /* AuthorService */]) === 'function' && _a) || Object])
     ], AuthorComponent);
@@ -302,27 +298,8 @@ var AuthorComponent = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Author; });
-var Author = (function () {
-    function Author(id, firstName, lastName, books) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.books = books;
-    }
-    return Author;
-}());
-//# sourceMappingURL=D:/Projects/LibraryDemo/src/main/frontend/src/author.model.js.map
-
-/***/ }),
-
-/***/ 514:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__book_service__ = __webpack_require__(331);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__author_author_model__ = __webpack_require__(513);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BookComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -335,14 +312,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
 var BookComponent = (function () {
     function BookComponent(bookService) {
         this.bookService = bookService;
     }
     BookComponent.prototype.ngOnInit = function () {
-        this.books = [{ id: 1, title: "It", author: new __WEBPACK_IMPORTED_MODULE_2__author_author_model__["a" /* Author */](1, "Stephan", "King", []), genre: "novel", year: new Date('1986') },
-            { id: 2, title: "Shinning", author: null, genre: "horror", year: new Date('1977') }];
         this.getAllBooks();
     };
     BookComponent.prototype.getAllBooks = function () {
@@ -353,8 +327,8 @@ var BookComponent = (function () {
     BookComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
             selector: 'app-book',
-            template: __webpack_require__(675),
-            styles: [__webpack_require__(672)]
+            template: __webpack_require__(674),
+            styles: [__webpack_require__(671)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__book_service__["a" /* BookService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__book_service__["a" /* BookService */]) === 'function' && _a) || Object])
     ], BookComponent);
@@ -365,7 +339,7 @@ var BookComponent = (function () {
 
 /***/ }),
 
-/***/ 515:
+/***/ 514:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -381,49 +355,49 @@ var environment = {
 
 /***/ }),
 
+/***/ 669:
+/***/ (function(module, exports) {
+
+module.exports = ".nav-wrapper{\r\n  background: #9a94ee;\r\n}\r\n.container{\r\n  font-style: italic;\r\n}\r\n"
+
+/***/ }),
+
 /***/ 670:
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "h4{\r\n  text-align: center;\r\n}\r\ntd {\r\n  width: 25%;\r\n}\r\n"
 
 /***/ }),
 
 /***/ 671:
 /***/ (function(module, exports) {
 
-module.exports = "h4{\r\n  text-align: center;\r\n}\r\n"
+module.exports = "h4 {\r\n  text-align: center;\r\n}\r\ntd {\r\n   width: 20%;\r\n}\r\n"
 
 /***/ }),
 
 /***/ 672:
 /***/ (function(module, exports) {
 
-module.exports = "h4 {\r\n  text-align: center;\r\n}\r\n"
+module.exports = "<nav>\n  <div class=\"nav-wrapper\">\n    <a href=\"#\" class=\"brand-logo center\">Library app</a>\n    <ul id=\"nav-mobile\" class=\"left hide-on-med-and-down\">\n      <li><a routerLink=\"/booktable\">Book Table</a></li>\n      <li><a routerLink=\"/authortable\">Author Table</a></li>\n    </ul>\n  </div>\n</nav>\n<div class=\"container\">\n  <router-outlet></router-outlet>\n</div>\n"
 
 /***/ }),
 
 /***/ 673:
 /***/ (function(module, exports) {
 
-module.exports = "<nav>\n  <div class=\"nav-wrapper\">\n    <a href=\"#\" class=\"brand-logo center\">Library app</a>\n    <ul id=\"nav-mobile\" class=\"left hide-on-med-and-down\">\n      <li><a routerLink=\"/booktable\">Book Table</a></li>\n      <li><a routerLink=\"/authortable\">Author Table</a></li>\n    </ul>\n  </div>\n</nav>\n<div class=\"container\">\n  <router-outlet></router-outlet>\n</div>\n"
+module.exports = "<h4>Author Table</h4>\n<table class=\"highlight\">\n  <thead>\n  <tr>\n    <th style=\"width: 25%\">ID</th>\n    <th style=\"width: 25%\">First name</th>\n    <th style=\"width: 25%\">Last name</th>\n    <th style=\"width: 25%\">Books</th>\n  </tr>\n  </thead>\n  <tbody>\n  <tr *ngFor=\"let author of authors\">\n    <td>{{author.id}}</td>\n    <td>{{author.firstName}}</td>\n    <td>{{author.lastName}}</td>\n    <a routerLink=\"/booktable\">\n      <td>\n        <ng-container *ngFor=\"let book of author.books\">{{book.title}},\n        </ng-container>\n      </td>\n  </a>\n  </tr>\n  </tbody>\n</table>\n"
 
 /***/ }),
 
 /***/ 674:
 /***/ (function(module, exports) {
 
-module.exports = "<h4>Author Table</h4>\n<table class=\"highlight\">\n  <thead>\n  <tr>\n    <th>Id</th>\n    <th>First name</th>\n    <th>Last name</th>\n    <th>Books</th>\n  </tr>\n  </thead>\n  <tbody>\n  <tr *ngFor=\"let author of authors\">\n    <td>{{author.id}}</td>\n    <td>{{author.firstName}}</td>\n    <td>{{author.lastName}}</td>\n    <a routerLink=\"/booktable\">\n      <td>\n        <ng-container *ngFor=\"let book of author.books\">{{book.title}},\n        </ng-container>\n      </td>\n  </a>\n  </tr>\n  </tbody>\n</table>\n"
+module.exports = "<h4>Book Table</h4>\r\n<table class=\"highlight\">\r\n  <thead>\r\n  <tr >\r\n    <th style=\"width: 20%\">ID</th>\r\n    <th style=\"width: 20%\">Title</th>\r\n    <th style=\"width: 20%\">Author</th>\r\n    <th style=\"width: 20%\">Genre</th>\r\n    <th style=\"width: 20%\">Year of publication</th>\r\n  </tr>\r\n  </thead>\r\n  <tbody>\r\n  <tr *ngFor=\"let book of books\">\r\n    <td>{{book.id}}</td>\r\n    <td>{{book.title}}</td>\r\n    <div *ngIf=\"!book.author\">\r\n      <td>Unknown author</td>\r\n    </div>\r\n    <div *ngIf=\"book.author\">\r\n      <a routerLink=\"/authortable\">\r\n        <td>{{book.author.firstName }} {{book.author.lastName}}</td>\r\n      </a>\r\n    </div>\r\n    <td>{{book.genre}}</td>\r\n    <td>{{book.year}}</td>\r\n  </tr>\r\n  </tbody>\r\n</table>\r\n"
 
 /***/ }),
 
-/***/ 675:
-/***/ (function(module, exports) {
-
-module.exports = "<h4>Book Table</h4>\r\n<table class=\"highlight\">\r\n  <thead>\r\n  <tr>\r\n    <th>ID</th>\r\n    <th>Title</th>\r\n    <th>Author</th>\r\n    <th>Genre</th>\r\n    <th>Year of publication</th>\r\n  </tr>\r\n  </thead>\r\n  <tbody>\r\n  <tr *ngFor=\"let book of books\">\r\n    <td>{{book.id}}</td>\r\n    <td>{{book.title}}</td>\r\n    <div *ngIf=\"!book.author\">\r\n      <td>Unknown author</td>\r\n    </div>\r\n    <div *ngIf=\"book.author\">\r\n      <a routerLink=\"/authortable\">\r\n        <td>{{book.author.firstName}} {{book.author.lastName}}</td>\r\n      </a>\r\n    </div>\r\n    <td>{{book.genre}}</td>\r\n    <td>{{book.year.getFullYear()}}</td>\r\n  </tr>\r\n  </tbody>\r\n</table>\r\n"
-
-/***/ }),
-
-/***/ 708:
+/***/ 707:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(392);
@@ -431,5 +405,5 @@ module.exports = __webpack_require__(392);
 
 /***/ })
 
-},[708]);
+},[707]);
 //# sourceMappingURL=main.bundle.map

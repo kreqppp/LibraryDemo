@@ -13,6 +13,7 @@ public class BookService {
     @Autowired
     private BookDao bookDao;
 
+    // fetch all books
     public Iterable<Book> getAllBooks(){
         return bookDao.findAll();
     }
