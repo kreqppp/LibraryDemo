@@ -17,4 +17,8 @@ public class BookService {
     public Iterable<Book> getAllBooks(){
         return bookDao.findAll();
     }
+
+    public void deleteBookById(int bookId){
+        bookDao.deleteById((long) bookId);
+    }
 }

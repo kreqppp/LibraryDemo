@@ -15,10 +15,25 @@
     <td>{{author.lastName}}</td>
     <a routerLink="/booktable">
       <td>
-        <ng-container *ngFor="let book of author.books">{{book.title}},
+        <ng-container *ngFor="let book of author.bookDtos">{{book.title}},
         </ng-container>
       </td>
   </a>
+    <td><button type="button" (click)="loadAuthorToEdit(author.id)">Edit</button> </td>
+    <td><button type="button" (click)="deleteAuthor(author.id)">Delete</button></td>
   </tr>
   </tbody>
 </table>
+<button (click)="AddNewAuthor()">Add Author</button>
+<popup (confirmClick)="onAuthorFormSubmit()" (cancelClick)="hidePopup()">
+  <form [formGroup]="authorForm">
+  <div>
+    <td>First Name</td>
+    <td><input formControlName="firstName"></td>
+  </div>
+  <div>
+    <td>Last Name</td>
+    <td><input formControlName="lastName"></td>
+  </div>
+  </form>
+</popup>

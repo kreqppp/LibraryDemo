@@ -1,20 +1,26 @@
 package com.kreqppp.demo.controller;
 
+import com.kreqppp.demo.dto.AuthorDto;
+import com.kreqppp.demo.dto.BookDto;
+import com.kreqppp.demo.mapper.ModelMapp;
 import com.kreqppp.demo.model.Author;
 import com.kreqppp.demo.model.Book;
 import com.kreqppp.demo.service.AuthorService;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.sql.Date;
-import java.util.List;
+import java.util.*;
 
 
 @RestController
+@RequestMapping("user")
 @CrossOrigin(origins = "http://localhost:4200")
 @Setter
 public class AuthorController {
@@ -22,17 +28,53 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
-    @GetMapping("all-authors")
-    public ResponseEntity<List<Author>> getAllAuthors(){
-        Iterable<Author> authors = authorService.getAllAuthors();
-        //here too... read in BookController
-        for(Author author : authors){
-            for(Book book : author.getBooks()){
-                book.setAuthor(null);
-            }
-        }
-        return new ResponseEntity<List<Author>>((List<Author>)authors, HttpStatus.OK);
+    @Autowired
+    private ModelMapp modelMapp;
+
+    //get author by Id
+    @GetMapping("author")
+    public ResponseEntity<AuthorDto> getAuthorById(@RequestParam("id") String id) {
+        Optional<Author> author = authorService.getAuthorById(Integer.parseInt(id));
+        Author author1 = author.get();
+        return new ResponseEntity<AuthorDto>(modelMapp.authorConvertToDto(author1), HttpStatus.OK);
     }
+
+    //get all authors
+    @GetMapping("all-authors")
+    public ResponseEntity<List<AuthorDto>> getAllAuthorDtos(){
+
+
+        Iterable<Author> authors = authorService.getAllAuthors();
+        return new ResponseEntity<>(modelMapp.authorsConvertToDtos((List<Author>) authors), HttpStatus.OK);
+    }
+
+    //create Author
+    @PostMapping("author")
+    public ResponseEntity<Void> createAuthor(@RequestBody AuthorDto authorDto, UriComponentsBuilder builder) {
+        authorService.saveAuthor(modelMapp.authorConvertToEntity(authorDto));
+        HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    }
+
+    //update author
+    @PutMapping("author")
+    public ResponseEntity<AuthorDto> updateArticle(@RequestBody AuthorDto authorDto) {
+        Author author = modelMapp.authorConvertToEntity(authorDto);
+        authorService.updateAuthor(author);
+        return new ResponseEntity<AuthorDto>(authorDto, HttpStatus.OK);
+    }
+
+    //delete Author
+    @DeleteMapping("author")
+    public ResponseEntity<Void> deleteBook(@RequestParam("id") String id) {
+        System.out.println(id);
+        authorService.deleteAuthorById(Integer.parseInt(id));
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+    }
+
+
+
+
 
     // insert test date into database
     @RequestMapping("test")

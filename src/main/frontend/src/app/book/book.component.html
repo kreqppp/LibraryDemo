@@ -23,6 +23,12 @@
     </div>
     <td>{{book.genre}}</td>
     <td>{{book.year}}</td>
+    <td><button type="button" (click)="loadBookToEdit(book.id)">Edit</button> </td>
+    <td><button type="button" (click)="deleteBook(book.id)">Delete</button></td>
   </tr>
   </tbody>
+  <popup>
+    wrong
+  </popup>
+  <button type="submit" (click)="addNewBook()">Add book</button>
 </table>

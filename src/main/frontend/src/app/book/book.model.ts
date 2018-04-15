@@ -6,4 +6,6 @@ export class Book{
               public author: Author,
               public genre: string,
               public year: Date){}
+
+
 }

@@ -9,4 +9,5 @@ import javax.persistence.EntityManager;
 
 @Repository
 public interface AuthorDao extends CrudRepository<Author, Long>{
+
 }

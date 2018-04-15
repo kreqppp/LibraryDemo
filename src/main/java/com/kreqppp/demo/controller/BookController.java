@@ -1,14 +1,13 @@
 package com.kreqppp.demo.controller;
 
+import com.kreqppp.demo.mapper.ModelMapp;
 import com.kreqppp.demo.model.Book;
 import com.kreqppp.demo.service.BookService;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +33,13 @@ public class BookController {
             book.getAuthor().setBooks(null);
         }
         return new ResponseEntity<List<Book>>((List<Book>)books, HttpStatus.OK);
+    }
+
+    //delete book
+    @DeleteMapping("book")
+    public ResponseEntity<Void> deleteBook(@RequestParam("id") String id) {
+        System.out.println(id);
+        bookService.deleteBookById(Integer.parseInt(id));
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 }
