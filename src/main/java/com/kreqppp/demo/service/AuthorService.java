@@ -38,11 +38,13 @@ public class AuthorService {
 
     //update author
     public Author updateAuthor(Author author){
+        System.out.println(author.getId() + " " + author.getFirstName() + " " + author.getLastName());
         Optional<Author> auth = authorDao.findById(author.getId());
         Author author1 = auth.get();
-        author1.setLastName(author.getFirstName());
+        author1.setFirstName(author.getFirstName());
         author1.setLastName(author.getLastName());
-        return null;
+        authorDao.save(author1);
+        return author1;
     }
 
 }
