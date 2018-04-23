@@ -14,5 +14,6 @@ public interface ModelMapperInterface {
     Author authorConvertToEntity(AuthorDto authorDto);
     AuthorDto authorConvertToDto(Author author);
     List<AuthorDto> authorsConvertToDtos(List<Author> authors);
+    List<BookDto> booksConvertToDtos(List<Book> books);
 
 }

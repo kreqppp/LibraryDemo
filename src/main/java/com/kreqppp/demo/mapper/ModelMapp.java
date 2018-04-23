@@ -62,6 +62,17 @@ public class ModelMapp implements ModelMapperInterface {
         return authorDtos;
     }
 
+    @Override
+    public List<BookDto> booksConvertToDtos(List<Book> books) {
+        List<BookDto> bookDtos = new ArrayList<>();
+        for(Book book: books){
+            BookDto bookDto = modelMapper.map(book, BookDto.class);
+            bookDto.setAuthorDto(modelMapper.map(book.getAuthor(), AuthorDto.class));
+            bookDtos.add(bookDto);
+        }
+        return bookDtos;
+    }
+
 
     @Bean
     public ModelMapper modelMapper(){

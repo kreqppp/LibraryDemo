@@ -13,12 +13,12 @@
   <tr *ngFor="let book of books">
     <td>{{book.id}}</td>
     <td>{{book.title}}</td>
-    <div *ngIf="!book.author">
+    <div *ngIf="!book.authorDto">
       <td>Unknown author</td>
     </div>
-    <div *ngIf="book.author">
+    <div *ngIf="book.authorDto">
       <a routerLink="/authortable">
-        <td>{{book.author.firstName }} {{book.author.lastName}}</td>
+        <td>{{book.authorDto.firstName }} {{book.authorDto.lastName}}</td>
       </a>
     </div>
     <td>{{book.genre}}</td>
@@ -27,8 +27,34 @@
     <td><button type="button" (click)="deleteBook(book.id)">Delete</button></td>
   </tr>
   </tbody>
-  <popup>
-    wrong
+  <popup (confirmClick)="onBookFormSubmit()" (cancelClick)="hidePopup()">
+    <form [formGroup]="bookForm">
+      <div>
+        <td>Title</td>
+        <td><input formControlName="title"></td>
+      </div>
+
+      <form>
+      <div class="form-group">
+        <label> Author </label>
+        <select id="selectedObject" name="selectedObject" class="browser-default"
+                [(ngModel)]="selectedObject" (change)="updateObjValue3($event.target)">
+          <option value="" disabled selected>Choose Author</option>
+          <option *ngFor="let author of authors" [ngValue]="author.id" >{{author.firstName}}
+            {{author.lastName}}</option>
+        </select>
+      </div>
+      </form>
+
+      <div>
+        <td>Genre</td>
+        <td><input formControlName="genre"></td>
+      </div>
+      <div >
+        <td>Year of publication</td>
+        <td><input formControlName="year"></td>
+      </div>
+    </form>
   </popup>
-  <button type="submit" (click)="addNewBook()">Add book</button>
+  <button type="submit" (click)="addNewBook()">Add Book</button>
 </table>

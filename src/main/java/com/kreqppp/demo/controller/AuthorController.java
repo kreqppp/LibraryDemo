@@ -42,8 +42,6 @@ public class AuthorController {
     //get all authors
     @GetMapping("all-authors")
     public ResponseEntity<List<AuthorDto>> getAllAuthorDtos(){
-
-
         Iterable<Author> authors = authorService.getAllAuthors();
         return new ResponseEntity<>(modelMapp.authorsConvertToDtos((List<Author>) authors), HttpStatus.OK);
     }
@@ -58,7 +56,7 @@ public class AuthorController {
 
     //update author
     @PutMapping("author")
-    public ResponseEntity<AuthorDto> updateArticle(@RequestBody AuthorDto authorDto) {
+    public ResponseEntity<AuthorDto> updateAuthor(@RequestBody AuthorDto authorDto) {
         Author author = modelMapp.authorConvertToEntity(authorDto);
         authorService.updateAuthor(author);
         return new ResponseEntity<AuthorDto>(authorDto, HttpStatus.OK);
@@ -71,9 +69,6 @@ public class AuthorController {
         authorService.deleteAuthorById(Integer.parseInt(id));
         return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
-
-
-
 
 
     // insert test date into database

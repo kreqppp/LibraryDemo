@@ -9,8 +9,8 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class BookService{
 
-  allBooksUrl = "http://localhost:8080/all-books";
-  bookUrl = "http://localhost:8080/book";
+  allBooksUrl = "http://localhost:8080/user/all-books";
+  bookUrl = "http://localhost:8080/user/book";
 
   constructor(public http: Http){}
 
@@ -25,17 +25,19 @@ export class BookService{
   createBook(book: Book):Observable<number> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
+    console.log(book);
     return this.http.post(this.bookUrl, book, options)
       .map(success => success.status)
       .catch(this.handleError);
   }
+
   //fetch book by id
-  getBookById(bookId: string): Observable<Book[]> {
-    let myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
-    let myParams = new URLSearchParams();
-    myParams.append('id', bookId);
-    let options = new RequestOptions(<RequestOptionsArgs>{headers: myHeaders, params: myParams});
+  getBookById(bookId: string): Observable<Book> {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let params = new URLSearchParams();
+    params.append('id', bookId);
+    let options = new RequestOptions({headers: headers, search: params});
     return this.http.get(this.bookUrl, options)
       .map(this.extractData)
       .catch(this.handleError);
@@ -51,12 +53,11 @@ export class BookService{
   }
 
   //delete book
-  deleteBookById(bookId: string): Observable<number> {
+  deleteBookById(bookId: string) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let params = new URLSearchParams();
     params.set('id', bookId);
-    let options = new RequestOptions(<RequestOptionsArgs>{headers: headers, params: params});
-    console.log(options);
+    let options = new RequestOptions({headers: headers, search: params});
     return this.http.delete(this.bookUrl, options)
       .map(success => success.status)
       .catch(this.handleError);
@@ -73,3 +74,4 @@ export class BookService{
     return Observable.throw(error.status);
   }
 }
+

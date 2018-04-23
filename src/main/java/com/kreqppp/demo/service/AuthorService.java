@@ -37,14 +37,12 @@ public class AuthorService {
     }
 
     //update author
-    public Author updateAuthor(Author author){
-        System.out.println(author.getId() + " " + author.getFirstName() + " " + author.getLastName());
-        Optional<Author> auth = authorDao.findById(author.getId());
-        Author author1 = auth.get();
-        author1.setFirstName(author.getFirstName());
-        author1.setLastName(author.getLastName());
-        authorDao.save(author1);
-        return author1;
+    public void updateAuthor(Author author){
+        Optional<Author> authorOptional = authorDao.findById(author.getId());
+        Author authorUp = authorOptional.get();
+        authorUp.setFirstName(author.getFirstName());
+        authorUp.setLastName(author.getLastName());
+        authorDao.save(authorUp);
     }
 
 }
